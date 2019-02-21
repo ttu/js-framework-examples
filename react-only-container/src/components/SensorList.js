@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import Sensor from './Sensor';
 
 // class SensorList extends Component {
@@ -30,25 +31,21 @@ const SensorList = props => {
         ))}
       </select>
       {props.sensorIds.map(sendorId => (
-        <Sensor
-          key={sendorId}
-          {...props.sensors[sendorId]}
-          fetchData={props.fetchData}
-        />
+        <Sensor key={sendorId} {...props.sensors[sendorId]} fetchData={props.fetchData} />
       ))}
     </div>
   );
 };
 
 SensorList.prototype.propTypes = {
-  selectedId: React.PropTypes.string,
-  interval: React.PropTypes.number,
-  handleChange: React.PropTypes.func,
-  fetchData: React.PropTypes.func
+  selectedId: PropTypes.string,
+  interval: PropTypes.number,
+  handleChange: PropTypes.func,
+  fetchData: PropTypes.func,
 };
 
 SensorList.prototype.defaultProps = {
-  sensorIds: []
+  sensorIds: [],
 };
 
 export default SensorList;

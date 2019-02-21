@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 // class Sensor extends Component {
 //     constructor(props) {
@@ -33,15 +34,15 @@ const Sensor = props => {
 
 Sensor.prototype.defaultProps = {
   interval: 20000,
-  isSelected: false
+  isSelected: false,
 };
 
 Sensor.prototype.propTypes = {
-  sensorId: React.PropTypes.string,
-  temperature: React.PropTypes.number,
-  interval: React.PropTypes.number,
-  isSelected: React.PropTypes.bool,
-  fetchData: React.PropTypes.func
+  sensorId: PropTypes.string,
+  temperature: PropTypes.number,
+  interval: PropTypes.number,
+  isSelected: PropTypes.bool,
+  fetchData: PropTypes.func,
 };
 
 export default Sensor;

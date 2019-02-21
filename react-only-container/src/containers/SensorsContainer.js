@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import update from 'immutability-helper';
 import SensorList from '../components/SensorList';
 import SensorApi from '../services/SensorApi';
@@ -11,27 +12,23 @@ class SensorContainer extends Component {
 
   static defaultProps = {
     interval: 5000,
-    selectedInterval: 1000
+    selectedInterval: 1000,
   };
 
   static propTypes = {
-    interval: React.PropTypes.number,
-    selectedInterval: React.PropTypes.number
+    interval: PropTypes.number,
+    selectedInterval: PropTypes.number,
   };
 
   componentDidMount() {
     this.fetchSensors();
 
     this.intervalId = setInterval(() => {
-      this.state.sensorIds.map(s => {
-        if (!this.state.sensors[s].isSelected) this.fetchData(s);
-      });
+      this.state.sensorIds.filter(s => !this.state.sensors[s].isSelected).forEach(s => this.fetchData(s));
     }, this.props.interval);
 
     this.selectedIntervalId = setInterval(() => {
-      this.state.sensorIds.map(s => {
-        if (this.state.sensors[s].isSelected) this.fetchData(s);
-      });
+      this.state.sensorIds.filter(s => this.state.sensors[s].isSelected).forEach(s => this.fetchData(s));
     }, this.props.selectedInterval);
   }
 
@@ -45,10 +42,9 @@ class SensorContainer extends Component {
       const sensorsObject = response.reduce((acc, cur, idx) => {
         acc[cur] = {
           sensorId: cur,
-          interval:
-            idx === 0 ? this.props.selectedInterval : this.props.interval,
+          interval: idx === 0 ? this.props.selectedInterval : this.props.interval,
           isSelected: idx === 0,
-          temperature: 0
+          temperature: 0,
         };
         return acc;
       }, {});
@@ -56,7 +52,7 @@ class SensorContainer extends Component {
       this.setState({
         sensorIds: Object.keys(sensorsObject),
         sensors: sensorsObject,
-        selectedId: response[0]
+        selectedId: response[0],
       });
     });
   };
@@ -65,7 +61,7 @@ class SensorContainer extends Component {
     SensorApi.getSensor(sensorId).then(response => {
       this.setState(prevState => {
         const updated = update(prevState.sensors, {
-          [sensorId]: { temperature: { $set: response.data } }
+          [sensorId]: { temperature: { $set: response.data } },
         });
         return { sensors: updated };
       });
@@ -80,13 +76,10 @@ class SensorContainer extends Component {
         return update(acc, {
           [cur]: {
             interval: {
-              $set:
-                cur === selctedId
-                  ? this.props.selectedInterval
-                  : this.props.interval
+              $set: cur === selctedId ? this.props.selectedInterval : this.props.interval,
             },
-            isSelected: { $set: cur === selctedId }
-          }
+            isSelected: { $set: cur === selctedId },
+          },
         });
       }, prevState.sensors);
 
@@ -96,13 +89,7 @@ class SensorContainer extends Component {
 
   render() {
     const newProps = { ...this.props, ...this.state };
-    return (
-      <SensorList
-        {...newProps}
-        fetchData={this.fetchData}
-        handleChange={this.handleChange}
-      />
-    );
+    return <SensorList {...newProps} fetchData={this.fetchData} handleChange={this.handleChange} />;
   }
 }
 

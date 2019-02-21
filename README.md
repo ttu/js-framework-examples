@@ -2,9 +2,9 @@
 
 Different implementations of a simple Sensor application.
 
-> NOTE: These examples are from end of 2016. I do not know how these implementations will match with today's recommendations.
-
 ### react-only
+
+> NOTE: Not updated since 2016
 
 - Only React
 - Smart components
@@ -19,8 +19,18 @@ Different implementations of a simple Sensor application.
 
 ### react-redux
 
+> NOTE: Not updated since 2016
+
 - Fork of react-only-container
 - Redux
+
+### react-hooks
+
+TODO
+
+### react-mobx
+
+TODO
 
 ##### Debug with VS Code
 
