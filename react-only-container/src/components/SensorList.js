@@ -18,23 +18,37 @@ import Sensor from './Sensor';
 //     }
 // }
 
-// Stateless functional Component
-const SensorList = (props) => {
-    return (
-        <div className="SensorList">
-            Sensors: <select value={props.selectedId} onChange={props.handleChange}>
-                {props.sensorIds.map(sensorId => <option key={sensorId} value={sensorId}>{sensorId}</option>)}
-            </select>
-            {props.sensorIds.map(sendorId => <Sensor key={sendorId} {...props.sensors[sendorId]} fetchData={props.fetchData} />)}
-        </div>
-    );
+const SensorList = props => {
+  return (
+    <div className="SensorList">
+      <label>Sensors:</label>
+      <select value={props.selectedId} onChange={props.handleChange}>
+        {props.sensorIds.map(sensorId => (
+          <option key={sensorId} value={sensorId}>
+            {sensorId}
+          </option>
+        ))}
+      </select>
+      {props.sensorIds.map(sendorId => (
+        <Sensor
+          key={sendorId}
+          {...props.sensors[sendorId]}
+          fetchData={props.fetchData}
+        />
+      ))}
+    </div>
+  );
 };
 
 SensorList.prototype.propTypes = {
-    selectedId: React.PropTypes.string,
-    interval: React.PropTypes.number,
-    handleChange: React.PropTypes.func,
-    fetchData: React.PropTypes.func
+  selectedId: React.PropTypes.string,
+  interval: React.PropTypes.number,
+  handleChange: React.PropTypes.func,
+  fetchData: React.PropTypes.func
+};
+
+SensorList.prototype.defaultProps = {
+  sensorIds: []
 };
 
 export default SensorList;
