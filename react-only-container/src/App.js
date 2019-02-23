@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import { Router, Route, Link, browserHistory } from 'react-router';
+import { Switch, Route, Link } from 'react-router-dom';
 
 import logo from './logo.svg';
 import './App.css';
@@ -15,10 +15,32 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Welcome to React</h2>
         </div>
-        <h3>Weather</h3>
-        <WeatherContainer />
-        <h3>Sensors</h3>
-        <SensorContainer />
+        <div>
+          <Link to="/weather">Weather</Link> <Link to="/sensors">Sensors</Link>
+        </div>
+        <Switch>
+          <Route exact path="/" render={() => <h3>Hello</h3>} />
+          <Route
+            exact
+            path="/weather"
+            render={() => (
+              <div>
+                <h3>Weather</h3>
+                <WeatherContainer />
+              </div>
+            )}
+          />
+          <Route
+            exact
+            path="/sensors"
+            render={() => (
+              <div>
+                <h3>Sensors</h3>
+                <SensorContainer />
+              </div>
+            )}
+          />
+        </Switch>
       </div>
     );
   }
