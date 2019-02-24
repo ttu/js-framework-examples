@@ -1,17 +1,10 @@
 import update from 'immutability-helper';
-import {
-  GET_SENSORS,
-  GET_SENSOR_DATA,
-  HANDLE_CHANGE
-} from '../actions/Sensors';
+import { GET_SENSORS, GET_SENSOR_DATA, HANDLE_CHANGE } from '../actions/Sensors';
 
 const interval = 5000;
 const selectedInterval = 500;
 
-const sensors = (
-  state = { sensorIds: [], sensors: {}, selectedId: '' },
-  action
-) => {
+const sensors = (state = { sensorIds: [], sensors: {}, selectedId: '' }, action) => {
   switch (action.type) {
     case GET_SENSORS:
       const sensorsObj = action.response.reduce((acc, cur, idx) => {
@@ -19,7 +12,7 @@ const sensors = (
           sensorId: cur,
           interval: idx === 0 ? selectedInterval : interval,
           isSelected: idx === 0,
-          temperature: 0
+          temperature: 0,
         };
         return acc;
       }, {});
@@ -27,7 +20,7 @@ const sensors = (
       const data = {
         sensorIds: Object.keys(sensorsObj),
         sensors: sensorsObj,
-        selectedId: action.response[0]
+        selectedId: action.response[0],
       };
       return { ...state, ...data };
     case HANDLE_CHANGE:
@@ -35,24 +28,24 @@ const sensors = (
         return update(acc, {
           [cur]: {
             interval: {
-              $set: cur === action.sensorId ? selectedInterval : interval
+              $set: cur === action.sensorId ? selectedInterval : interval,
             },
-            isSelected: { $set: cur === action.sensorId }
-          }
+            isSelected: { $set: cur === action.sensorId },
+          },
         });
       }, state.sensors);
       return {
         ...state,
         sensors: sensorsObject,
-        selectedId: action.sensorId
+        selectedId: action.sensorId,
       };
     case GET_SENSOR_DATA:
       const updated = update(state.sensors, {
-        [action.response.id]: { temperature: { $set: action.response.data } }
+        [action.response.id]: { temperature: { $set: action.response.data } },
       });
       return {
         ...state,
-        sensors: updated
+        sensors: updated,
       };
     default:
       return state;

@@ -6,7 +6,7 @@ export const getWeather = () => {
     SensorApi.getWeather().then(response => {
       dispatch({
         type: 'GET_WEATHER',
-        temperature: response.temperature
+        temperature: response.temperature,
       });
     });
   };

@@ -8,9 +8,7 @@ class SensorApi {
   }
 
   getSensor(sensorId) {
-    return fetch(`${this.url}/api/sensor/${sensorId}`).then(response =>
-      response.json()
-    );
+    return fetch(`${this.url}/api/sensor/${sensorId}`).then(response => response.json());
   }
 
   getWeather() {

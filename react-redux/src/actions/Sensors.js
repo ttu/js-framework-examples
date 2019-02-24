@@ -9,7 +9,7 @@ export const getSensors = () => {
     SensorApi.getSensors().then(response => {
       dispatch({
         type: GET_SENSORS,
-        response
+        response,
       });
     });
   };
@@ -20,7 +20,7 @@ export const getSensorData = sensorId => {
     SensorApi.getSensor(sensorId).then(response => {
       dispatch({
         type: GET_SENSOR_DATA,
-        response
+        response,
       });
     });
   };
@@ -28,5 +28,5 @@ export const getSensorData = sensorId => {
 
 export const handleChange = event => ({
   type: HANDLE_CHANGE,
-  sensorId: event.target.value
+  sensorId: event.target.value,
 });

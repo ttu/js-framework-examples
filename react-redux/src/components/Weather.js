@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Weather = ({ loading, temperature, getWeather }) => {
   return (
@@ -11,13 +12,13 @@ const Weather = ({ loading, temperature, getWeather }) => {
 
 Weather.prototype.defaultProps = {
   loading: true,
-  temperature: 0
+  temperature: 0,
 };
 
 Weather.prototype.propTypes = {
-  loading: React.PropTypes.bool,
-  temperature: React.PropTypes.number,
-  getWeather: React.PropTypes.func
+  loading: PropTypes.bool,
+  temperature: PropTypes.number,
+  getWeather: PropTypes.func,
 };
 
 export default Weather;

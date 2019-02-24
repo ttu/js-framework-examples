@@ -3,11 +3,11 @@ const weather = (state = { loading: true, temperature: 0 }, action) => {
     case 'GET_WEATHER':
       return {
         temperature: action.temperature,
-        loading: false
+        loading: false,
       };
     case 'LOADING_WEATHER':
       return {
-        loading: true
+        loading: true,
       };
     default:
       return state;

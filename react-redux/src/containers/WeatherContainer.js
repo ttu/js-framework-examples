@@ -13,7 +13,7 @@ const mapDispatchToProps = dispatch => {
   return {
     getWeather: () => {
       dispatch(getWeather());
-    }
+    },
   };
 };
 

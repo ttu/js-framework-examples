@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Sensor = ({ sensorId, temperature, interval, isSelected, fetchData }) => {
   return (
@@ -13,15 +14,15 @@ const Sensor = ({ sensorId, temperature, interval, isSelected, fetchData }) => {
 
 Sensor.prototype.defaultProps = {
   interval: 20000,
-  isSelected: false
+  isSelected: false,
 };
 
 Sensor.prototype.propTypes = {
-  sensorId: React.PropTypes.string,
-  temperature: React.PropTypes.number,
-  interval: React.PropTypes.number,
-  isSelected: React.PropTypes.bool,
-  fetchData: React.PropTypes.func
+  sensorId: PropTypes.string,
+  temperature: PropTypes.number,
+  interval: PropTypes.number,
+  isSelected: PropTypes.bool,
+  fetchData: PropTypes.func,
 };
 
 export default Sensor;

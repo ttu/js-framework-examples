@@ -19,12 +19,10 @@ Different implementations of a simple Sensor application.
 
 ### react-redux
 
-> NOTE: Not updated since 2016
-
 - Fork of react-only-container
 - Redux
 
-### react-hooks
+### react-context-api
 
 TODO
 

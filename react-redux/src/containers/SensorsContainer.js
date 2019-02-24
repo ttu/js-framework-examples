@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import update from 'immutability-helper';
 import { connect } from 'react-redux';
 import { getSensors, getSensorData, handleChange } from '../actions/Sensors';
 
@@ -7,23 +6,15 @@ import SensorList from '../components/SensorList';
 import { interval, selectedInterval } from '../properties/Sensor';
 
 class SensorComponentContainer extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     this.props.getSensors();
 
     this.intervalId = setInterval(() => {
-      this.props.sensorIds.map(s => {
-        if (!this.props.sensors[s].isSelected) this.props.getSensorData(s);
-      });
+      this.props.sensorIds.filter(s => !this.props.sensors[s].isSelected).forEach(s => this.props.getSensorData(s));
     }, interval);
 
     this.selectedIntervalId = setInterval(() => {
-      this.props.sensorIds.map(s => {
-        if (this.props.sensors[s].isSelected) this.props.getSensorData(s);
-      });
+      this.props.sensorIds.filter(s => this.props.sensors[s].isSelected).forEach(s => this.props.getSensorData(s));
     }, selectedInterval);
   }
 
