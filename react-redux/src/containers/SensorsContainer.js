@@ -7,7 +7,7 @@ import { interval, selectedInterval } from '../properties/Sensor';
 
 class SensorComponentContainer extends Component {
   componentDidMount() {
-    this.props.getSensors();
+    if (this.props.sensorIds.length === 0) this.props.getSensors();
 
     this.intervalId = setInterval(() => {
       this.props.sensorIds.filter(s => !this.props.sensors[s].isSelected).forEach(s => this.props.getSensorData(s));

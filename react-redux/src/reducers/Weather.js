@@ -1,4 +1,4 @@
-const weather = (state = { loading: true, temperature: 0 }, action) => {
+const weather = (state = { loading: false, temperature: Number.MIN_VALUE }, action) => {
   switch (action.type) {
     case 'GET_WEATHER':
       return {
