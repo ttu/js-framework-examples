@@ -4,8 +4,6 @@ Different implementations of a simple Sensor application.
 
 ### react-only
 
-> NOTE: Not updated since 2016
-
 - Only React
 - Smart components
 
@@ -15,6 +13,7 @@ Different implementations of a simple Sensor application.
 - Container components
 - Stateless function components
 - Switched state sensors array to object with keys
+- Router and page for showing current weather
 - Use immutability-helper
 
 ### react-redux
